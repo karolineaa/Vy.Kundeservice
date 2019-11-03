@@ -9,16 +9,15 @@ namespace Vy.Kundeservice.Models
 {
     public class VyContext : DbContext
     {
-        public VyContext() { }
-
-        public VyContext(DbContextOptions<VyContext> options) : base(options) {
+        public VyContext() {
             Database.EnsureCreated();
         }
+
         public DbSet<FAQ> FAQ { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FAQ>().HasData(new FAQ { Id=1,Spørsmål = "Hva", Svar="Dette" });
+            modelBuilder.Entity<FAQ>().HasData(new FAQ { Id=1,Spørsmål = "Hva", Svar="Dette", Kategori="Billetter og rabatter" });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

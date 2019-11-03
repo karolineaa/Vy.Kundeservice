@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Vy.Kundeservice.Models;
 
 namespace Vy.Kundeservice
 {
@@ -29,6 +30,8 @@ namespace Vy.Kundeservice
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDbContext<VyContext>();
 
         }
 
