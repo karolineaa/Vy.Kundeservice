@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Vy.Kundeservice.Models;
 
 namespace Vy.Kundeservice
 {
@@ -30,9 +29,7 @@ namespace Vy.Kundeservice
             {
                 configuration.RootPath = "ClientApp/build";
             });
-            services.AddDbContext<VyContext>(options => {
-                options.UseSqlServer(@"server=(LocalDB)\MSSQLLocalDB;database=VyDatabase;trusted_connection=true;");
-            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

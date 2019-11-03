@@ -9,6 +9,8 @@ namespace Vy.Kundeservice.Models
 {
     public class VyContext : DbContext
     {
+        public VyContext() { }
+
         public VyContext(DbContextOptions<VyContext> options) : base(options) {
             Database.EnsureCreated();
         }
@@ -18,6 +20,14 @@ namespace Vy.Kundeservice.Models
         {
             modelBuilder.Entity<FAQ>().HasData(new FAQ { Id=1,Spørsmål = "Hva", Svar="Dette" });
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer(@"server=(LocalDB)\MSSQLLocalDB;database=VyDatabase;trusted_connection=true;");
+        }
+
     }
 }
 
