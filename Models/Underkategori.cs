@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,5 +11,6 @@ namespace Vy.Kundeservice
         public string Navn { get; set; }
         [ForeignKey("Hovedkategori")]
         public int HovedkategoriId { get; set; }
-}
+        public List<FAQ> FAQ { get; set; }
+    }
 }

@@ -30,8 +30,7 @@ export class FAQ extends Component {
 
         return (
             <div>
-                <h1>Spørsmål og svar</h1>
-                <p>Her er det både spørsmål og svar.</p>
+                <h1>Ofte stilte espørsmål</h1>
                 {contents}
             </div>
         );
@@ -39,6 +38,13 @@ export class FAQ extends Component {
 
     async populateFAQData() {
         const response = await fetch('api/faq/get');
+        /*
+        const response = fetch('api/faq/hentunderkategorier', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ hovedkategoriId: 1 })
+        });
+        */
         const data = await response.json();
         console.dir(data);
         this.setState({ faqs: data, loading: false });
