@@ -28,7 +28,7 @@ export class Home extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
+            ? <p><em>Laster...</em></p>
             : Home.renderHovedkategorier(this.state.hovedkategorier);
 
         return (
@@ -37,7 +37,6 @@ export class Home extends Component {
                 <h4>Hva lurer du på? Velg tema og finn svar på alt fra hvem som<br></br>
                     kan få rabatt og hvordan du søker om refusjon til hvordan<br></br>
                     appen fungerer og hva slags bagasje du kan ha med om bord.</h4><br></br><hr></hr>
-
                 {contents}
             </div>
         );

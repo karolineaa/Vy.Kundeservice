@@ -13,7 +13,6 @@ export class UnderkategoriCollapseItem extends Component {
     async toggle() {
         // last inn data når man utvider underkategorien
         if (!this.state.collapse) {
-            console.log("laster data..");
             const response = await fetch('api/faq/getfaqs?id=' + 1);
             const faqs = await response.json();
             this.setState({ faqs: faqs });
@@ -22,6 +21,7 @@ export class UnderkategoriCollapseItem extends Component {
     }
 
     render() {
+        // tar inn props som ble sendt fra FAQ.js gjennom <UnderkategoriCollapseItem underkategori={underkategori} />
         const underkategori = this.props.underkategori;
 
         return (

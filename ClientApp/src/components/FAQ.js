@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { UnderkategoriCollapseItem } from './UnderkategoriCollapseItem';
 
-
 export class FAQ extends Component {
     static displayName = FAQ.name;
 
@@ -26,7 +25,7 @@ export class FAQ extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
+            ? <p><em>Laster...</em></p>
             : FAQ.renderUnderkategoriTable(this.state.underkategorier);
 
         return (

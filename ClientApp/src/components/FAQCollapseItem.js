@@ -26,6 +26,7 @@ export class FAQCollapseItem extends Component {
                 <hr></hr>
 
                 <Collapse isOpen={this.state.collapse}>
+                    {/* Her settes svaret inn fra ren HTML */}
                     <div dangerouslySetInnerHTML={{ __html: this.state.faq.svar }} />
                     <StarRatingComponent
                         name="rating"
