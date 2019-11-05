@@ -18,9 +18,10 @@ export class FAQCollapseItem extends Component {
 
         return (
             <div>
-                <h2 onClick={this.toggle}>
-                    <strong>{faq.spørsmål}</strong>
-                </h2>
+                <h4 onClick={this.toggle}>
+                    <strong>{faq.spørsmål}</strong></h4>
+                    <hr></hr>
+                
                 <Collapse isOpen={this.state.collapse}><div dangerouslySetInnerHTML={{ __html: faq.svar }} /></Collapse>
             </div>
         );

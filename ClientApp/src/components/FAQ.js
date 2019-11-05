@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { FAQCollapseItem } from './FAQCollapseItem';
+import { Rating } from './Rating';
+import { FAQForm } from './FAQForm';
 
 export class FAQ extends Component {
     static displayName = FAQ.name;
@@ -23,6 +25,16 @@ export class FAQ extends Component {
         );
     }
 
+    static renderRating(rating) {
+        return (
+            <div>
+                {rating.map(rating =>
+                    <Rating key={faq.id} faq={faq} />
+                )}
+            </div>
+        );
+    }
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
@@ -30,7 +42,8 @@ export class FAQ extends Component {
 
         return (
             <div>
-                <h1>Ofte stilte espørsmål</h1>
+                <h1>Spørsmål og svar</h1>
+                <br></br><br></br><hr></hr>
                 {contents}
             </div>
         );
