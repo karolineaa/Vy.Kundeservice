@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Jumbotron } from 'reactstrap'
 import { Link } from 'react-router-dom';
+import { FAQForm } from './FAQForm';
+
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -22,6 +24,8 @@ export class Home extends Component {
                        <h2> <Link tag={Link} className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
                     </Jumbotron>
                 )}
+                <FAQForm></FAQForm>
+
             </div>
         );
     }
