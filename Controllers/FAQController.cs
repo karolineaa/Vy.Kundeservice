@@ -13,20 +13,6 @@ namespace Vy.Kundeservice.Controllers
         HovedkategoriDAL hovedkategorierDAL = new HovedkategoriDAL();
         UnderkategoriDAL underkategorierDAL = new UnderkategoriDAL();
 
-        [HttpGet]
-        public IEnumerable<FAQ> Get()
-        {
-            return faqDAL.GetAllFAQs();
-        }
-
-        /*
-        [HttpPost]
-        public IEnumerable<FAQ> GetFAQs(int underkategoriId)
-        {
-            var underkategori = underkategorierDAL.GetUnderkategori(underkategoriId);
-            return underkategori.FAQ;
-        }
-        */
 
         [HttpGet]
         public IEnumerable<Underkategori> GetUnderkategorier(int id)
@@ -47,6 +33,12 @@ namespace Vy.Kundeservice.Controllers
         {
             var hovedkategorier = hovedkategorierDAL.GetAllHovedkategorier();
             return hovedkategorier;
+        }
+
+        [HttpGet]
+        public void FAQRating(int faqId, int rating)
+        {
+            faqDAL.UpdateFAQRating(faqId, rating);
         }
 
     }
