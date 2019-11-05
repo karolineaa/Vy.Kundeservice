@@ -20,7 +20,19 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
-        //To Add new employee record     
+
+        public IEnumerable<FAQ> GetFAQsFromUnderkategoriId(int id)
+        {
+            try
+            {
+                return db.FAQ.Where(f => f.UnderkategoriId == id).ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int AddFAQ(FAQ faq)
         {
             try
@@ -53,8 +65,8 @@ namespace Vy.Kundeservice.Models
         {
             try
             {
-                FAQ employee = db.FAQ.Find(id);
-                return employee;
+                FAQ faq = db.FAQ.Find(id);
+                return faq;
             }
             catch
             {

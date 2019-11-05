@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { Jumbotron } from 'reactstrap'
 import { Link } from 'react-router-dom';
 
-export class Home extends Component {
-    static displayName = Home.name;
+export class Underkategori extends Component {
+    static displayName = Underkategori.name;
 
     constructor(props) {
         super(props);
-        this.state = { hovedkategorier: [], loading: true };
+        this.state = { underkategorier: [], loading: true };
     }
 
     componentDidMount() {
-        this.populateHovedkategorier();
+        this.populateUnderkategorier();
     }
 
-    static renderHovedkategorier(hovedkategorier) {
+    static renderUnderkategorier(underkategorier) {
         return (
             <div>
-                {hovedkategorier.map(kategori =>
+                {underkategorier.map(kategori =>
                     <Jumbotron key={kategori.id}>
                        <h2> <Link tag={Link} className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
                     </Jumbotron>
@@ -29,22 +29,21 @@ export class Home extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : Home.renderHovedkategorier(this.state.hovedkategorier);
+            : Underkategori.renderUnderkategorier(this.state.underkategorier);
 
         return (
             <div>
-                <h1>SpÃ¸rsmÃ¥l og svar</h1><br></br>
-                <h4>Hva lurer du pÃ¥? Velg tema og finn svar pÃ¥ alt fra hvem som<br></br>
-                    kan fÃ¥ rabatt og hvordan du sÃ¸ker om refusjon til hvordan<br></br>
+                <h1>Spørsmål og svar</h1><br></br>
+                <h4>Hva lurer du på? Velg tema og finn svar på alt fra hvem som <br></br>
+                    kan få rabatt og hvordan du søker om refusjon til hvordan <br></br>
                     appen fungerer og hva slags bagasje du kan ha med om bord.</h4><br></br><hr></hr>
-
                 {contents}
             </div>
         );
     }
 
-    async populateHovedkategorier() {
-        const response = await fetch('api/faq/hovedkategorier');
+    async populateUnderkategorier() {
+        const response = await fetch('api/faq/underkategorier');
         const data = await response.json();
         this.setState({ hovedkategorier: data, loading: false });
     }

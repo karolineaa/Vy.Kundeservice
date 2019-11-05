@@ -13,7 +13,7 @@ namespace Vy.Kundeservice.Models
         {
             try
             {
-                return db.Hovedkategorier.Include("Underkategorier").ToList();
+                return db.Hovedkategorier.ToList();
             }
             catch
             {
@@ -53,8 +53,8 @@ namespace Vy.Kundeservice.Models
         {
             try
             {
-                Hovedkategori employee = db.Hovedkategorier.Find(id);
-                return employee;
+                Hovedkategori hovedkategori = db.Hovedkategorier.Include("Underkategorier").FirstOrDefault(h => h.Id == id);
+                return hovedkategori;
             }
             catch
             {

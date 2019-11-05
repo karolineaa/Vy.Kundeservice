@@ -20,7 +20,19 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
-        //To Add new employee record     
+
+        public IEnumerable<Underkategori> GetUnderkategorierFromHovedkategoriId(int id)
+        {
+            try
+            {
+                return db.Underkategorier.Where(u => u.HovedkategoriId == id).ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public int AddUnderkategori(Underkategori Underkategori)
         {
             try
@@ -34,7 +46,7 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
-        //To Update the records of a particluar Underkategori    
+    
         public int UpdateUnderkategori(Underkategori Underkategori)
         {
             try
@@ -48,13 +60,13 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
-        //Get the details of a particular Underkategori    
+  
         public Underkategori GetUnderkategori(int id)
         {
             try
             {
-                Underkategori employee = db.Underkategorier.Find(id);
-                return employee;
+                Underkategori underkategori = db.Underkategorier.Find(id);
+                return underkategori;
             }
             catch
             {

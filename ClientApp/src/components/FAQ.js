@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
-import { FAQCollapseItem } from './FAQCollapseItem';
-import { Rating } from './Rating';
-import { FAQForm } from './FAQForm';
+import { UnderkategoriCollapseItem } from './UnderkategoriCollapseItem';
+
 
 export class FAQ extends Component {
     static displayName = FAQ.name;
 
     constructor(props) {
         super(props);
-        this.state = { faqs: [], loading: true };
+        this.state = { underkategorier: [], loading: true };
     }
 
     componentDidMount() {
-        this.populateFAQData();
+        this.populateUnderkategoriData();
     }
 
-    static renderFAQTable(faqs) {
+    static renderUnderkategoriTable(underkategorier) {
         return (
             <div>
-                {faqs.map(faq =>
-                    <FAQCollapseItem key={faq.id} faq={faq} />
-                )}
-            </div>
-        );
-    }
-
-    static renderRating(rating) {
-        return (
-            <div>
-                {rating.map(rating =>
-                    <Rating key={faq.id} faq={faq} />
+                {underkategorier.map(underkategori =>
+                    <UnderkategoriCollapseItem key={underkategori.id} underkategori={underkategori} />
                 )}
             </div>
         );
@@ -38,7 +27,7 @@ export class FAQ extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : FAQ.renderFAQTable(this.state.faqs);
+            : FAQ.renderUnderkategoriTable(this.state.underkategorier);
 
         return (
             <div>
@@ -49,17 +38,9 @@ export class FAQ extends Component {
         );
     }
 
-    async populateFAQData() {
-        const response = await fetch('api/faq/get');
-        /*
-        const response = fetch('api/faq/hentunderkategorier', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ hovedkategoriId: 1 })
-        });
-        */
+    async populateUnderkategoriData() {
+        const response = await fetch('api/faq/getunderkategorier?id='+1);
         const data = await response.json();
-        console.dir(data);
-        this.setState({ faqs: data, loading: false });
+        this.setState({ underkategorier: data, loading: false });
     }
 }

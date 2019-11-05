@@ -19,24 +19,34 @@ namespace Vy.Kundeservice.Controllers
             return faqDAL.GetAllFAQs();
         }
 
+        /*
         [HttpPost]
-        public IEnumerable<FAQ> HentFAQs(int underkategoriId)
+        public IEnumerable<FAQ> GetFAQs(int underkategoriId)
         {
             var underkategori = underkategorierDAL.GetUnderkategori(underkategoriId);
             return underkategori.FAQ;
         }
+        */
 
-        [HttpPost]
-        public IEnumerable<Underkategori> HentUnderkategorier([FromBody]int hovedkategoriId)
+        [HttpGet]
+        public IEnumerable<Underkategori> GetUnderkategorier(int id)
         {
-            var hovedkategori = hovedkategorierDAL.GetHovedkategori(hovedkategoriId);
-            return hovedkategori.Underkategorier;
+            var underkategorier = underkategorierDAL.GetUnderkategorierFromHovedkategoriId(id);
+            return underkategorier;
+        }
+
+        [HttpGet]
+        public IEnumerable<FAQ> GetFAQs(int id)
+        {
+            var faqs = faqDAL.GetFAQsFromUnderkategoriId(id);
+            return faqs;
         }
 
         [HttpGet]
         public IEnumerable<Hovedkategori> Hovedkategorier()
         {
-            return hovedkategorierDAL.GetAllHovedkategorier();
+            var hovedkategorier = hovedkategorierDAL.GetAllHovedkategorier();
+            return hovedkategorier;
         }
 
     }
