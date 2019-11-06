@@ -1,53 +1,48 @@
 ﻿import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
+import { Button, Label, FormGroup, CustomInput } from 'reactstrap';
 
-export const FAQForm = (props) => {
-    return (
-        <Form>
-            <FormGroup tag="fieldset">
-                <legend><h3>Hva gjelder det?</h3></legend>
-                <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        <p>Tog</p>
-                    </Label>
-                </FormGroup>
-                <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        <p>Buss</p>
-                    </Label>
-                </FormGroup>
-                <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        <p>Bybil</p>
-                    </Label>
-                </FormGroup>
-                <FormGroup check>
-                    <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        <p>Annet</p>
-                    </Label>
-                </FormGroup>
-                <FormGroup>
-                    <h3>Email</h3>
-                    <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="exampleText"><h3>Skriv inn spørsmål</h3></Label>
-                    <Input type="textarea" name="text" id="exampleText" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="exampleFile">File</Label>
-                    <Input type="file" name="file" id="exampleFile" />
-                    <FormText color="muted">
-                    </FormText>
-                </FormGroup>
+export class FAQForm extends React.Component {
+    render() {
+        return (
+            <AvForm>
+                <h1>Gi oss tilbakemelding</h1>
+                <h4>Vil du gi oss ros eller ris, eller har du noe å fortelle?</h4>
+                <br></br><hr></hr>
+                <AvForm>
+                    <AvField name="name" label="Fornavn" type="text" validate={{
+                        required: { value: true, errorMessage: 'Skriv inn fornavnet ditt'  },
+                        pattern: { value: '^[a-zA-Z0-9ÆØÅæøå]+$', errorMessage: 'Ugyldig fornavn' },
+                        minLength: { value: 2, errorMessage: 'Fornavnet må være mellom 2 og 20 bokstaver' },
+                        maxLength: { value: 20, errorMessage: 'Fornavnet må være mellom 2 og 20 bokstaver' }
+                    }} />
+                    <AvField name="nameCustomMessage" label="Etternavn" type="text" validate={{
+                        required: { value: true, errorMessage: 'Skriv inn etternavnet ditt' },
+                        pattern: { value: '^[a-zA-Z0-9ÆØÅæøå]+$', errorMessage: 'Ugyldig etternavn' },
+                        minLength: { value: 2, errorMessage: 'Etternavnet må være mellom 2 og 20 bokstaver' },
+                        maxLength: { value: 20, errorMessage: 'Etternavnet må være mellom 2 og 20 bokstaver' }
+                    }} />
 
-            </FormGroup>
-            <Button>Submit</Button>
-        </Form>
-    );
+                <AvField name="emailProp" label="Epost" type="text" validate={{ email: true }} />
+
+                <AvRadioGroup inline name="radio" label="Hva gjelder det?" required>
+                    <AvRadio label="Tog" value="Tog" />
+                    <AvRadio label="Buss" value="Buss" />
+                    <AvRadio label="Bybil" value="Bybil" />
+                    <AvRadio label="Annet" value="Annet"  />
+                </AvRadioGroup>
+
+                <AvField name="emne" label="Emne" type="text" required />
+
+                <AvField name="spm" label="Hva lurer du på?" type="text" required />
+
+
+                <FormGroup>
+                    <Button>Send skjema</Button>
+                    </FormGroup>
+                    </AvForm>
+            </AvForm>
+        );
+    }
 }
 

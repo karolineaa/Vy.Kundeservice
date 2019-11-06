@@ -24,8 +24,6 @@ export class Home extends Component {
                        <h2> <Link tag={Link} className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
                     </Jumbotron>
                 )}
-                <FAQForm></FAQForm>
-
             </div>
         );
     }
