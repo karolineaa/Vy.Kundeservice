@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
-import { Button, Label, FormGroup, CustomInput } from 'reactstrap';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { Button, FormGroup } from 'reactstrap';
 
 export class FAQForm extends React.Component {
 
@@ -8,22 +8,47 @@ export class FAQForm extends React.Component {
 
     constructor() {
         super();
-        this.state = { hovedkategorier: [], loading: true, hovedkategoriId: 1 };
+        this.state = {
+            hovedkategorier: [],
+            underkategorier: [],
+            loadingHovedkategorier: true,
+            loadingUnderkategorier: true,
+            hovedkategoriId: 0,
+            underkategoriId: 1
+        };
     }
 
     componentDidMount() {
         this.populateHovedkategorier();
     }
 
-    async change() {
-        console.log("valgte option");
+    async changeHovedkategori(event) {
+        event.persist();
+        await this.populateUnderkategorier(event.target.value);
     }
+
+    async changeUnderkategori(event) {
+        this.setState({ underkategoriId: event.target.value });
+    }
+
+    async populateHovedkategorier() {
+        const response = await fetch('api/faq/hovedkategorier');
+        const data = await response.json();
+        this.setState({ hovedkategorier: data, loadingHovedkategorier: false });
+        await this.populateUnderkategorier(1);
+    }
+
+    async populateUnderkategorier(underkategoriId) {
+        const response = await fetch('api/faq/underkategorier?id=' + underkategoriId);
+        const data = await response.json();
+        this.setState({ underkategoriId: underkategoriId, underkategorier: data, loadingUnderkategorier: false });
+    }
+
+
 
     render() {
 
         return (
-
-
             <AvForm>
                 <h1>Gi oss tilbakemelding</h1>
                 <h4>Vil du gi oss ros eller ris, eller har du noe å fortelle?</h4>
@@ -41,16 +66,24 @@ export class FAQForm extends React.Component {
                     maxLength: { value: 20, errorMessage: 'Etternavnet må være mellom 2 og 20 bokstaver' }
                 }} />
 
-                {this.state.loading
+                {this.state.loadingHovedkategorier
                     ? <p><em>Laster...</em></p>
-                    : <AvField type="select" name="select" label="Hva gjelder det?" onChange={this.change} value={this.state.hovedkategoriId}>
+                    : <AvField type="select" name="select" label="Velg en kategori" onChange={this.changeHovedkategori.bind(this)} value={this.state.hovedkategoriId}>
                         {this.state.hovedkategorier.map(kategori =>
-                            <option on key={kategori.id}>{kategori.navn}</option>
+                            <option value={kategori.id} key={kategori.id}>{kategori.navn}</option>
                         )}
                     </AvField>
                 }
-                
 
+                {this.state.loadingUnderkategorier
+                    ? <p></p>
+                    : <AvField type="select" name="select" label="Velg en underkategori" onChange={this.changeUnderkategori.bind(this)} value={this.state.underkategoriId}>
+                        {this.state.underkategorier.map(underkategori =>
+                            <option value={underkategori.id} key={underkategori.id}>{underkategori.navn}</option>
+                        )}
+                    </AvField>
+                }
+               
                 <AvField name="emailProp" label="Epost" type="text" validate={{ email: true }} />
                 <AvField name="spm" label="Hva lurer du på?" type="textarea" required />
                 <FormGroup>
@@ -59,12 +92,6 @@ export class FAQForm extends React.Component {
             </AvForm>
 
         );
-    }
-
-    async populateHovedkategorier() {
-        const response = await fetch('api/faq/hovedkategorier');
-        const data = await response.json();
-        this.setState({ hovedkategorier: data, loading: false });
     }
 
 }
