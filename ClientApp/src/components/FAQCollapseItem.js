@@ -21,19 +21,19 @@ export class FAQCollapseItem extends Component {
     render() {
         return (
             <div>
-                <h4 onClick={this.toggle}>
+                <h4 className="spm" onClick={this.toggle}>
                     <strong>{this.state.faq.spørsmål}</strong></h4>
                 <hr></hr>
 
                 <Collapse isOpen={this.state.collapse}>
                     {/* Her settes svaret inn fra ren HTML */}
                     <div dangerouslySetInnerHTML={{ __html: this.state.faq.svar }} />
-                    <StarRatingComponent
+                    <h2><StarRatingComponent
                         name="rating"
                         starCount={5}
                         value={this.state.rating}
                         onStarClick={this.onStarClick.bind(this)}
-                    />
+                    /></h2>
                 </Collapse>
             </div>
         );

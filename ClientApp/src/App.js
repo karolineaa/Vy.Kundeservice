@@ -6,6 +6,7 @@ import { FAQ } from './components/FAQ';
 import { FAQForm } from './components/FAQForm';
 import './custom.css'
 
+
 export default class App extends Component {
   static displayName = App.name;
 
@@ -14,8 +15,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
             <Route path='/faqs' component={FAQ} />
-            <Route path='/form' component={FAQForm} />
-
+            <Route path='/skjema' component={FAQForm} />
       </Layout>
     );
   }

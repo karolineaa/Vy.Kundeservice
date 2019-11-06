@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron } from 'reactstrap'
 import { Link } from 'react-router-dom';
-import { FAQForm } from './FAQForm';
-
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -36,9 +34,9 @@ export class Home extends Component {
         return (
             <div>
                 <h1>Spørsmål og svar</h1><br></br>
-                <h4>Hva lurer du på? Velg tema og finn svar på alt fra hvem som<br></br>
+                <h5>Hva lurer du på? Velg tema og finn svar på alt fra hvem som<br></br>
                     kan få rabatt og hvordan du søker om refusjon til hvordan<br></br>
-                    appen fungerer og hva slags bagasje du kan ha med om bord.</h4><br></br><hr></hr>
+                    appen fungerer og hva slags bagasje du kan ha med om bord.</h5><br></br><hr></hr>
                 {contents}
             </div>
         );
