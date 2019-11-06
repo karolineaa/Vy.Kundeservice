@@ -13,7 +13,7 @@ export class UnderkategoriCollapseItem extends Component {
     async toggle() {
         // last inn data når man utvider underkategorien
         if (!this.state.collapse) {
-            const response = await fetch('api/faq/getfaqs?id=' + 1);
+            const response = await fetch('api/faq/faqs?id=' + 1);
             const faqs = await response.json();
             this.setState({ faqs: faqs });
         }

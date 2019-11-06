@@ -38,7 +38,7 @@ export class FAQ extends Component {
     }
 
     async populateUnderkategoriData() {
-        const response = await fetch('api/faq/getunderkategorier?id='+1);
+        const response = await fetch('api/faq/underkategorier?id='+1);
         const data = await response.json();
         this.setState({ underkategorier: data, loading: false });
     }
