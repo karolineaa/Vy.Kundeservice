@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Collapse } from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 export class FAQCollapseItem extends Component {
     constructor(props) {
@@ -14,15 +15,16 @@ export class FAQCollapseItem extends Component {
     }
 
     async onStarClick(nextValue, prevValue, name) {
-        await fetch(`api/faq/faqrating?faqId=${this.state.faq.id}&rating=${nextValue}`);
+        await fetch(`api/kundeservice/faqrating?faqId=${this.state.faq.id}&rating=${nextValue}`);
         this.setState({ rating: nextValue });
     }
 
     render() {
+        let arrow = this.state.collapse ? <IoIosArrowUp className="arrow" /> : <IoIosArrowDown className="arrow" />;
         return (
-            <div>
+            <div className="spmIndent">
                 <h4 className="spm" onClick={this.toggle}>
-                    <strong>{this.state.faq.spørsmål}</strong></h4>
+                    {this.state.faq.spørsmål}{arrow}</h4>
                 <hr></hr>
 
                 <Collapse isOpen={this.state.collapse}>

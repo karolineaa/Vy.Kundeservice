@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { Button, FormGroup } from 'reactstrap';
+import { Button, FormGroup, Spinner, Breadcrumb } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export class FAQForm extends React.Component {
 
@@ -32,24 +33,26 @@ export class FAQForm extends React.Component {
     }
 
     async populateHovedkategorier() {
-        const response = await fetch('api/faq/hovedkategorier');
+        const response = await fetch('api/kundeservice/hovedkategorier');
         const data = await response.json();
         this.setState({ hovedkategorier: data, loadingHovedkategorier: false });
         await this.populateUnderkategorier(1);
     }
 
     async populateUnderkategorier(underkategoriId) {
-        const response = await fetch('api/faq/underkategorier?id=' + underkategoriId);
+        const response = await fetch('api/kundeservice/underkategorier?hovedkategoriId=' + underkategoriId);
         const data = await response.json();
         this.setState({ underkategoriId: underkategoriId, underkategorier: data, loadingUnderkategorier: false });
     }
-
-
 
     render() {
 
         return (
             <AvForm>
+                <Breadcrumb tag="nav" listTag="div">
+                    <Link className="breadcrumb-item" to={'/'}>Hjem</Link>
+                    <div className="active breadcrumb-item">Send spørsmål</div>
+                </Breadcrumb>
                 <h1>Gi oss tilbakemelding</h1>
                 <h4>Vil du gi oss ros eller ris, eller har du noe å fortelle?</h4>
                 <br></br><hr></hr>
@@ -67,7 +70,7 @@ export class FAQForm extends React.Component {
                 }} />
 
                 {this.state.loadingHovedkategorier
-                    ? <p><em>Laster...</em></p>
+                    ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
                     : <AvField type="select" name="select" label="Velg en kategori" onChange={this.changeHovedkategori.bind(this)} value={this.state.hovedkategoriId}>
                         {this.state.hovedkategorier.map(kategori =>
                             <option value={kategori.id} key={kategori.id}>{kategori.navn}</option>

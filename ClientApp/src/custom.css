@@ -16,3 +16,11 @@ code {
 .spm {
     color: #7a7978;
 }
+
+.arrow {
+    float: right;
+}
+
+.spmIndent {
+    margin-left: 15px;
+}

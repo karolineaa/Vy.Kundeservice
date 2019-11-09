@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Vy.Kundeservice.Models;
+using Newtonsoft.Json;
 
 namespace Vy.Kundeservice.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class FAQController : ControllerBase
+    public class KundeserviceController : ControllerBase
     {
 
         FAQDAL faqDAL = new FAQDAL();
@@ -14,16 +15,16 @@ namespace Vy.Kundeservice.Controllers
         UnderkategoriDAL underkategorierDAL = new UnderkategoriDAL();
 
         [HttpGet]
-        public IEnumerable<Underkategori> Underkategorier(int id)
+        public IEnumerable<Underkategori> Underkategorier(int hovedkategoriId)
         {
-            var underkategorier = underkategorierDAL.GetUnderkategorierFromHovedkategoriId(id);
+            var underkategorier = underkategorierDAL.GetUnderkategorierFromHovedkategoriId(hovedkategoriId);
             return underkategorier;
         }
 
         [HttpGet]
-        public IEnumerable<FAQ> FAQs(int id)
+        public IEnumerable<FAQ> FAQs(int underkategoriId)
         {
-            var faqs = faqDAL.GetFAQsFromUnderkategoriId(id);
+            var faqs = faqDAL.GetFAQsFromUnderkategoriId(underkategoriId);
             return faqs;
         }
 
@@ -32,6 +33,14 @@ namespace Vy.Kundeservice.Controllers
         {
             var hovedkategorier = hovedkategorierDAL.GetAllHovedkategorier();
             return hovedkategorier;
+        }
+
+        [HttpGet]
+        public ActionResult Hovedkategori(int hovedkategoriId)
+        {
+            var hovedkategori = hovedkategorierDAL.GetHovedkategori(hovedkategoriId);
+            var converted = JsonConvert.SerializeObject(hovedkategori.Navn, null, new JsonSerializerSettings());
+            return Content(converted, "application/json");
         }
 
         [HttpGet]

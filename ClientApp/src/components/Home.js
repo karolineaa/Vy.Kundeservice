@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Jumbotron } from 'reactstrap'
 import { Link } from 'react-router-dom';
+import { Spinner } from 'reactstrap';
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -19,7 +20,7 @@ export class Home extends Component {
             <div>
                 {hovedkategorier.map(kategori =>
                     <Jumbotron key={kategori.id}>
-                       <h2> <Link tag={Link} className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
+                       <h2> <Link props className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
                     </Jumbotron>
                 )}
             </div>
@@ -28,7 +29,7 @@ export class Home extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Laster...</em></p>
+            ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
             : Home.renderHovedkategorier(this.state.hovedkategorier);
 
         return (
@@ -43,7 +44,7 @@ export class Home extends Component {
     }
 
     async populateHovedkategorier() {
-        const response = await fetch('api/faq/hovedkategorier');
+        const response = await fetch('api/kundeservice/hovedkategorier');
         const data = await response.json();
         this.setState({ hovedkategorier: data, loading: false });
     }
