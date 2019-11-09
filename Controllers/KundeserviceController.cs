@@ -11,6 +11,7 @@ namespace Vy.Kundeservice.Controllers
     {
 
         FAQDAL faqDAL = new FAQDAL();
+        FAQInnsendtDAL faqinnsendtDAL = new FAQInnsendtDAL();
         HovedkategoriDAL hovedkategorierDAL = new HovedkategoriDAL();
         UnderkategoriDAL underkategorierDAL = new UnderkategoriDAL();
 
@@ -47,6 +48,12 @@ namespace Vy.Kundeservice.Controllers
         public void FAQRating(int faqId, int rating)
         {
             faqDAL.UpdateFAQRating(faqId, rating);
+        }
+
+        [HttpPost]
+        public void FAQInnsendt(FAQInnsendt innsendt)
+        {
+            faqinnsendtDAL.AddFAQInnsendt(innsendt);
         }
 
     }

@@ -45,10 +45,17 @@ export class FAQForm extends React.Component {
         this.setState({ underkategoriId: underkategoriId, underkategorier: data, loadingUnderkategorier: false });
     }
 
-    render() {
+    onValidSubmit = (event, values) => {
+        this.setState({ values });
+    };
+    onInvalidSubmit = (event, errors, values) => {
+        this.setState({ errors, values });
+    };
 
+    render() {
+        const { errors, values } = this.state;
         return (
-            <AvForm>
+            <AvForm ref={c => (this.form = c)} onValidSubmit={this.onValidSubmit} onInvalidSubmit={this.onInvalidSubmit}>
                 <Breadcrumb tag="nav" listTag="div">
                     <Link className="breadcrumb-item" to={'/'}>Hjem</Link>
                     <div className="active breadcrumb-item">Send spørsmål</div>

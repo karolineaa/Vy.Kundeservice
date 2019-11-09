@@ -20,6 +20,8 @@ namespace Vy.Kundeservice.Models
 
         public DbSet<Underkategori> Underkategorier { get; set; }
 
+        public DbSet<FAQInnsendt> FAQInnsendte { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
