@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Jumbotron } from 'reactstrap'
 import { Link } from 'react-router-dom';
-import { Spinner } from 'reactstrap';
+import { Jumbotron, Spinner } from 'reactstrap'
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -12,10 +11,10 @@ export class Home extends Component {
     }
 
     componentDidMount() {
-        this.populateHovedkategorier();
+        this.getHovedkategorier();
     }
 
-    static renderHovedkategorier(hovedkategorier) {
+    static renderHovedkategoriList(hovedkategorier) {
         return (
             <div>
                 {hovedkategorier.map(kategori =>
@@ -28,9 +27,9 @@ export class Home extends Component {
     }
 
     render() {
-        let contents = this.state.loading
+        let hovedkategorier = this.state.loading
             ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
-            : Home.renderHovedkategorier(this.state.hovedkategorier);
+            : Home.renderHovedkategoriList(this.state.hovedkategorier);
 
         return (
             <div>
@@ -38,12 +37,12 @@ export class Home extends Component {
                 <h5>Hva lurer du på? Velg tema og finn svar på alt fra hvem som<br></br>
                     kan få rabatt og hvordan du søker om refusjon til hvordan<br></br>
                     appen fungerer og hva slags bagasje du kan ha med om bord.</h5><br></br><hr></hr>
-                {contents}
+                {hovedkategorier}
             </div>
         );
     }
 
-    async populateHovedkategorier() {
+    async getHovedkategorier() {
         const response = await fetch('api/kundeservice/hovedkategorier');
         const data = await response.json();
         this.setState({ hovedkategorier: data, loading: false });

@@ -1,7 +1,7 @@
 ﻿import React from 'react';
+import { Link } from 'react-router-dom';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { Button, FormGroup, Spinner, Breadcrumb, Alert } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 export class FAQForm extends React.Component {
 

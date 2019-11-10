@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { UnderkategoriCollapseItem } from './UnderkategoriCollapseItem';
-import { Spinner, Breadcrumb } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Spinner, Breadcrumb } from 'reactstrap';
+import { UnderkategoriCollapseItem } from './UnderkategoriCollapseItem';
 
 export class FAQs extends Component {
     static displayName = FAQs.name;
@@ -13,20 +13,17 @@ export class FAQs extends Component {
 
     componentDidMount() {   
         const { match: { params } } = this.props;
-        this.getUnderkategoriData(params.hovedkategoriId);
-        this.getHovedkategoriData(params.hovedkategoriId);
-
+        this.getUnderkategorier(params.hovedkategoriId);
+        this.getHovedkategori(params.hovedkategoriId);
     }
 
     render() {
-        
         let underkategorier = this.state.loadingUnderkategorier
             ? <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
-            : FAQs.renderUnderkategoriTable(this.state.underkategorier);
+            : FAQs.renderUnderkategoriList(this.state.underkategorier);
         let hovedkategori = this.state.loadingHovedkategori
             ? <p></p>
             : this.state.hovedkategoriNavn;
-
         return (
             <div>
                 <Breadcrumb tag="nav" listTag="div">
@@ -40,7 +37,7 @@ export class FAQs extends Component {
         );
     }
 
-    static renderUnderkategoriTable(underkategorier) {
+    static renderUnderkategoriList(underkategorier) {
         return (
             <div>
                 {underkategorier.map(underkategori =>
@@ -50,13 +47,13 @@ export class FAQs extends Component {
         );
     }
 
-    async getUnderkategoriData(hovedkategoriId) {
+    async getUnderkategorier(hovedkategoriId) {
         const response = await fetch('api/kundeservice/underkategorier?hovedkategoriId=' + hovedkategoriId);
         const data = await response.json();
         this.setState({ underkategorier: data, loadingUnderkategorier: false });
     }
 
-    async getHovedkategoriData(hovedkategoriId) {
+    async getHovedkategori(hovedkategoriId) {
         const response = await fetch('api/kundeservice/hovedkategori?hovedkategoriId=' + hovedkategoriId);
         const data = await response.json();
         console.dir(data);
