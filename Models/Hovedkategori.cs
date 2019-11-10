@@ -9,5 +9,5 @@ namespace Vy.Kundeservice
         public int Id { get; set; }
         public string Navn { get; set; }
         public List<Underkategori> Underkategorier { get; set; }
-}
+    }
 }

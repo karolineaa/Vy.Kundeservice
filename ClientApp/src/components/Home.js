@@ -20,7 +20,7 @@ export class Home extends Component {
             <div>
                 {hovedkategorier.map(kategori =>
                     <Jumbotron key={kategori.id}>
-                       <h2> <Link props className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
+                       <h2> <Link className="text-dark" to={`/faqs/${kategori.id}`}>{kategori.navn}</Link> </h2>
                     </Jumbotron>
                 )}
             </div>

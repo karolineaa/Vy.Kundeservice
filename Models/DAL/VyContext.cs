@@ -183,7 +183,15 @@ namespace Vy.Kundeservice.Models
             FAQ faq113 = new FAQ() { Id = 113, Spørsmål = "Er det strømuttak om bord?", UnderkategoriId = 12, Rating = 5, Svar = "<p>På eldre lokaltog er det ikke strømuttak, mens på nye lokaltog (Flirt) er det strømuttak ved alle seter.</p> <p>På tog på strekningene Lillehammer–Oslo–Drammen, Eidsvoll–Oslo–Skien og Oslo–Halden–Gøteborg er det strømuttak ved alle seter, men eldre tog som brukes som innsatstog i rushtiden har strømuttak kun i Komfortavdelingen.</p> <p>På tog på strekningene Oslo–Stavanger, Oslo–Bergen, Oslo–Trondheim og Trondheim–Bodø er det strømuttak ved alle seter.</p> <p>På tog på Trønderbanen, Meråkerbanen, Rørosbanen og Raumabanen er det strømuttak kun ved et fåtall seter.</p> <p>Sovevogner har strømuttak i alle kupeer.</p> <p>Strømuttakene er 230V.</p>" };
 
             modelBuilder.Entity<FAQ>().HasData(faq1, faq2, faq3, faq4, faq5, faq6, faq7, faq8, faq9, faq10, faq11, faq12, faq13, faq14, faq15, faq16, faq17, faq18, faq19, faq20, faq21, faq22, faq23, faq24, faq25, faq26, faq27, faq28, faq29, faq30, faq31, faq32, faq33, faq34, faq35, faq36, faq37, faq38, faq39, faq40, faq41, faq42, faq43, faq44, faq45, faq46, faq47, faq48, faq49, faq50, faq51, faq52, faq53, faq54, faq55, faq56, faq57, faq58, faq59, faq60, faq61, faq62, faq63, faq64, faq65, faq66, faq67, faq68, faq69, faq70, faq71, faq72, faq73, faq74, faq75, faq76, faq77, faq78, faq79, faq80, faq81, faq82, faq83, faq84, faq85, faq86, faq87, faq88, faq89, faq90, faq91, faq92, faq93, faq94, faq95, faq96, faq97, faq98, faq99, faq100, faq101, faq102, faq103, faq104, faq105, faq106, faq107, faq108, faq109, faq110, faq111, faq112, faq113);
+
+            FAQInnsendt faqInnsendt1 = new FAQInnsendt() { Id = 1, Fornavn = "Karoline", Etternavn = "Ådnanes", Epost = "karoline.adnanes@gmail.com", HovedkategoriId = 1, UnderkategoriId = 1, Spørsmål = "Hvor mange billetter kan jeg kjøpe?" };
+            FAQInnsendt faqInnsendt2 = new FAQInnsendt() { Id = 2, Fornavn = "Kjersti", Etternavn = "Krokmogen", Epost = "kkrokmogen@gmail.com", HovedkategoriId = 2, UnderkategoriId = 4, Spørsmål = "Kan jeg få pengene tilbake?" };
+
+            modelBuilder.Entity<FAQInnsendt>().HasData(faqInnsendt1, faqInnsendt2);
+
         }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

@@ -51,9 +51,10 @@ namespace Vy.Kundeservice.Controllers
         }
 
         [HttpPost]
-        public void FAQInnsendt(FAQInnsendt innsendt)
+        public IActionResult FAQInnsendt([FromForm]FAQInnsendt innsendt)
         {
             faqinnsendtDAL.AddFAQInnsendt(innsendt);
+            return Ok();
         }
 
     }

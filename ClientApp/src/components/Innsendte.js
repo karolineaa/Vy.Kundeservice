@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { UnderkategoriCollapseItem } from './UnderkategoriCollapseItem';
 import { Spinner, Breadcrumb } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-export class FAQs extends Component {
-    static displayName = FAQs.name;
+export class Innsendte extends Component {
+    static displayName = Innsendte.name;
 
     constructor(props) {
         super(props);
@@ -50,16 +49,10 @@ export class FAQs extends Component {
         );
     }
 
-    async getUnderkategoriData(hovedkategoriId) {
-        const response = await fetch('api/kundeservice/underkategorier?hovedkategoriId=' + hovedkategoriId);
+    async getInnsendte() {
+
+        const response = await fetch('api/kundeservice/faqinnsendt?hovedkategoriId=' + hovedkategoriId);
         const data = await response.json();
         this.setState({ underkategorier: data, loadingUnderkategorier: false });
-    }
-
-    async getHovedkategoriData(hovedkategoriId) {
-        const response = await fetch('api/kundeservice/hovedkategori?hovedkategoriId=' + hovedkategoriId);
-        const data = await response.json();
-        console.dir(data);
-        this.setState({ hovedkategoriNavn: data, loadingHovedkategori: false });
     }
 }

@@ -56,7 +56,6 @@ namespace Vy.Kundeservice.Models
             }
         }
 
-        //To Update the records of a particluar FAQInnsendt    
         public int UpdateFAQInnsendt(FAQInnsendt FAQInnsendt)
         {
             using (var db = new VyContext())
@@ -90,22 +89,6 @@ namespace Vy.Kundeservice.Models
             }
         }
 
-       public bool UpdateFAQInnsendtRating(int FAQInnsendtId, int rating)
-        {
-            using (var db = new VyContext())
-            {
-                try
-                {
-                    var FAQInnsendt = db.FAQInnsendte.Find(FAQInnsendtId);
-                    FAQInnsendt.Rating = rating;
-                    db.SaveChanges();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
+      
     }
 }
