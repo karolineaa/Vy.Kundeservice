@@ -92,13 +92,13 @@ export class FAQForm extends React.Component {
                 <h4>Vil du gi oss ros eller ris, eller har du noen spørsmål til oss?</h4>
                 <br></br><hr></hr>
                 <AvForm hidden={this.state.sendComplete} ref={c => (this.formData = c)} onValidSubmit={this.onValidSubmit} onInvalidSubmit={this.onInvalidSubmit}>
-                    <AvField name="Fornavn" label="Fornavn" type="text" validate={{
+                    <AvField name="Fornavn" label="Fornavn*" type="text" validate={{
                         required: { value: true, errorMessage: 'Skriv inn fornavnet ditt' },
                         pattern: { value: '^[a-zA-ZÆØÅæøå]+$', errorMessage: 'Fornavnet kan ikke inneholde tall eller spesialtegn' },
                         minLength: { value: 2, errorMessage: 'Fornavnet må være mellom 2 og 20 bokstaver' },
                         maxLength: { value: 20, errorMessage: 'Fornavnet må være mellom 2 og 20 bokstaver' }
                     }} />
-                    <AvField name="Etternavn" label="Etternavn" type="text" validate={{
+                    <AvField name="Etternavn" label="Etternavn*" type="text" validate={{
                         required: { value: true, errorMessage: 'Skriv inn etternavnet ditt' },
                         pattern: { value: '^[a-zA-ZÆØÅæøå]+$', errorMessage: 'Etternavnet kan ikke inneholde tall eller spesialtegn' },
                         minLength: { value: 2, errorMessage: 'Etternavnet må være mellom 2 og 20 bokstaver' },
@@ -119,8 +119,8 @@ export class FAQForm extends React.Component {
                             </AvField>
                         </div>
                     }
-                    <AvField name="Epost" label="Epost" type="text" validate={{ email: true }} />
-                    <AvField name="Spørsmål" label="Hva lurer du på?" type="textarea" required />
+                    <AvField name="Epost" label="Epost*" type="text" validate={{ email: true }} />
+                    <AvField name="Spørsmål" label="Hva lurer du på?*" type="textarea" required />
                     {this.state.errorOnSend &&
                         <Alert color="danger">
                             {this.state.errorMessage}

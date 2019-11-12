@@ -20,35 +20,7 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
-
-        public int AddHovedkategori(Hovedkategori Hovedkategori)
-        {
-            try
-            {
-                db.Hovedkategorier.Add(Hovedkategori);
-                db.SaveChanges();
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
-        }
    
-        public int UpdateHovedkategori(Hovedkategori Hovedkategori)
-        {
-            try
-            {
-                db.Entry(Hovedkategori).State = EntityState.Modified;
-                db.SaveChanges();
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
         public Hovedkategori GetHovedkategori(int id)
         {
             try
@@ -61,21 +33,5 @@ namespace Vy.Kundeservice.Models
                 throw;
             }
         }
- 
-        public int DeleteHovedkategori(int id)
-        {
-            try
-            {
-                Hovedkategori emp = db.Hovedkategorier.Find(id);
-                db.Hovedkategorier.Remove(emp);
-                db.SaveChanges();
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
     }
 }
